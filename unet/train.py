@@ -8,7 +8,7 @@ from model import UNET
 import torchvision
 import matplotlib.pyplot as plt
 from torchmetrics import Accuracy
-from dataset import CarvanaDataset
+from dataset import CarvanaDataset, IMAGE_HEIGHT, IMAGE_WIDTH
 from utils import Plotter
 
 #randomly choose 20% of images from folder and move them to val_images folder
@@ -18,8 +18,6 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 BATCH_SIZE = 16
 NUM_EPOCHS = 50
 NUM_WORKERS = 2
-IMAGE_HEIGHT = 256  # 1280 originally
-IMAGE_WIDTH = 256  # 1918 originally
 PIN_MEMORY = True
 LOAD_MODEL = False
 TRAIN_IMG_DIR = "data/train_images"
