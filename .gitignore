@@ -1,8 +1,7 @@
-LEARN
-pix2pix/data
-unet/data
-unet/__pycache__
-pix2pix/__pycache__
-light/runs
-pix2pix/data unet/data
-LEARN/TESTS/data
+**/temp
+**/__pycache__
+**/data
+**/runs
+**/logs
+**/*logs
+**/back
