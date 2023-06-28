@@ -41,16 +41,18 @@ class Generator(nn.Module):
         self.down_blocks = nn.ModuleList(
             [
                 ConvBlock(num_features, num_features*2, kernel_size=3, stride=2, padding=1),
-                ConvBlock(num_features*2, num_features*4, kernel_size=3, stride=2, padding=1)
+                ConvBlock(num_features*2, num_features*4, kernel_size=3, stride=2, padding=1),
+                ConvBlock(num_features*4, num_features*8, kernel_size=3, stride=2, padding=1),
             ]
         )
         
         self.res_blocks = nn.Sequential(
-            *[ResidualBlock(num_features*4) for _ in range(num_residuals)]
+            *[ResidualBlock(num_features*8) for _ in range(num_residuals)]
         )
         
         self.up_blocks = nn.ModuleList(
             [
+                ConvBlock(num_features*8, num_features*4, down=False, kernel_size=3, stride=2, padding=1, output_padding=1),
                 ConvBlock(num_features*4, num_features*2, down=False, kernel_size=3, stride=2, padding=1, output_padding=1),
                 ConvBlock(num_features*2, num_features, down=False, kernel_size=3, stride=2, padding=1, output_padding=1)
             ]
@@ -69,11 +71,12 @@ class Generator(nn.Module):
     
 
 def test():
-    x = torch.randn((10, 3, 256 , 256))
+    x = torch.randn((4, 3, 256 , 256))
+    print(x.shape)
     model = Generator(img_channels=3, num_features=64, num_residuals=9)
     preds = model(x)
     print(preds.shape)
-    assert preds.shape == (10, 3, 256, 256), "Wrong output shape"
+    assert preds.shape == (4, 3, 256, 256), "Wrong output shape"
     print("Success")
 
 if __name__ == "__main__":
