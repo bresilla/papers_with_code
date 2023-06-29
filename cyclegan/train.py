@@ -1,11 +1,11 @@
 import lightning.pytorch as pl
-from dataset import DataModule
-from model2 import CycleGAN
+from dataset import DataModule as MyData
+from model import CycleGAN_2 as MyModel
 import config
 
-# init the autoencoder
-autoencoder = CycleGAN(learning_rate=config.LEARNING_RATE)
+
+model = MyModel(learning_rate=config.LEARNING_RATE)
 logger = pl.loggers.TensorBoardLogger("runs", name="CycleGAN")
-dataset = DataModule(data_root=config.DATA_ROOT, batch_size=config.BATCH_SIZE)
+dataset = MyData(data_root=config.DATA_ROOT, batch_size=config.BATCH_SIZE)
 trainer = pl.Trainer(limit_train_batches=16, max_epochs=200, logger=logger)
-trainer.fit(model=autoencoder, train_dataloaders=dataset)
+trainer.fit(model=model, train_dataloaders=dataset)

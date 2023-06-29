@@ -10,4 +10,5 @@ BATCH_SIZE = 4
 NUM_WORKERS = 8
 
 #datapath
-DATA_ROOT = "/doc/CODE/LEARN/pytorch/cyclegan/data/cyclegan/apple2orange/apple2orange"
+# DATA_ROOT = "/doc/CODE/LEARN/pytorch/cyclegan/data/cyclegan/apple2orange/apple2orange"
+DATA_ROOT = "/doc/code/train/pytorch/cyclegan/data/cyclegan/apple2orange/apple2orange"

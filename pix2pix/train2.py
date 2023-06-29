@@ -1,15 +1,10 @@
-import pytorch_lightning as pl
+import lightning.pytorch as pl
+from dataset import DataModule as MyData
+from model import PixModel as MyModel
 import config
-from model import PixModel
-from dataset import DataModule
 
-
-def main():
-    datamoudle = DataModule()
-    model = PixModel()
-    logger = pl.loggers.TensorBoardLogger('logs/', name='pix2pix')
-    trainer = pl.Trainer(logger=logger, max_epochs=config.num_epochs)
-    trainer.fit(model, datamoudle)
-        
-if __name__ == '__main__':
-    main()
+logger = pl.loggers.TensorBoardLogger('runs', name='pix2pix')
+dataset = MyData()
+trainer = pl.Trainer(logger=logger, max_epochs=config.num_epochs)
+model = MyModel()
+trainer.fit(model=model, train_dataloaders=dataset)
