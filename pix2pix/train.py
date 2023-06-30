@@ -1,14 +1,14 @@
 import torch
-from utils import save_checkpoint, load_checkpoint, Plotter, save_some_examples
+from utils import save_checkpoint, load_checkpoint, Plotter
 import torch.nn as nn
 import torch.optim as optim
-from dataset import ImageDataset, IMAGE_HEIGHT, IMAGE_WIDTH
 from generator import Generator
 from discriminator import Discriminator
 from torch.utils.data import DataLoader
 from torchmetrics import Accuracy
 from tqdm import tqdm
 import torchvision
+from dataset import ImageDataset
 
 DATASET = "maps"
 

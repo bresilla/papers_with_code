@@ -20,8 +20,8 @@ class CycleGAN(pl.LightningModule):
         self.save_hyperparameters()
         self.automatic_optimization = False
 
-        self.gen_H = Generator(img_channels=3, num_residuals=9)
-        self.gen_A = Generator(img_channels=3, num_residuals=9)
+        self.gen_H = Generator(in_channels=3, num_residuals=9)
+        self.gen_A = Generator(in_channels=3, num_residuals=9)
         self.dis_H = Discriminator(in_channels=3)
         self.dis_A = Discriminator(in_channels=3)
 
@@ -132,8 +132,8 @@ class CycleGAN_2(pl.LightningModule):
         self.save_hyperparameters()
         self.automatic_optimization = False
         # generator pair
-        self.genX = Generator(img_channels=3, num_residuals=9)
-        self.genY = Generator(img_channels=3, num_residuals=9)
+        self.genX = Generator(in_channels=3, num_residuals=9)
+        self.genY = Generator(in_channels=3, num_residuals=9)
         self.lm = 10.0
         
         # discriminator pair

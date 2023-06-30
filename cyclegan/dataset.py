@@ -1,16 +1,14 @@
 import os
+import numpy as np
+from PIL import Image
 import torchvision.transforms as transforms
 from torch.utils.data import random_split, DataLoader
 import lightning.pytorch as pl
 import torch.nn.functional as F
-
-from PIL import Image
-import numpy as np
-import os
 from torch.utils.data import Dataset
-
 import albumentations as albu
 from albumentations.pytorch import ToTensorV2
+import config
 
 class CustomDataset(Dataset):
     def __init__(self, data_root: str, stage: str, transform=None):
@@ -82,17 +80,21 @@ class DataModule(pl.LightningDataModule):
         predict_loader = DataLoader(self.predict_dataset, batch_size=self.batch_size, num_workers=self.num_workers)
         return predict_loader
     
-
 def test():
-    data_module = DataModule("/doc/CODE/LEARN/pytorch/cyclegan/data/cyclegan/apple2orange/apple2orange")
+    import matplotlib.pyplot as plt
+    data_module = DataModule(config.data_root)
     data_module.setup(stage="fit")
     train_loader = data_module.train_dataloader()
+    for x, y in train_loader:
+        plt.imshow(x[0].permute(1, 2, 0))
+        plt.show()
+        plt.imshow(y[0].permute(1, 2, 0))
+        plt.show()
+        break
     val_loader = data_module.val_dataloader()
     data_module.setup(stage="test")
     test_loader = data_module.test_dataloader()
     print(len(train_loader), len(val_loader), len(test_loader))     
-
-
 
 if __name__ == "__main__":
     test()

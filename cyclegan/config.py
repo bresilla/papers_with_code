@@ -1,14 +1,18 @@
 #hyperparameters
 
-LEARNING_RATE = 2e-4
-LAMBDA_IDENTITY = 0.0
-LAMBDA_CYCLE = 10.0
-LAMBDA_ADVERSARIAL = 1.0
-LAMBDA_PIXEL = 100.0
+learning_rate = 2e-4
+lambda_identity = 0.0
+lambda_cycle = 10.0
+labda_adversarial = 1.0
+lambda_pixel = 100.0
 
-BATCH_SIZE = 4
-NUM_WORKERS = 8
+batch_size = 4
+num_workers = 8
+num_epochs = 100
+
+device = "cuda"
 
 #datapath
-# DATA_ROOT = "/doc/CODE/LEARN/pytorch/cyclegan/data/cyclegan/apple2orange/apple2orange"
-DATA_ROOT = "/doc/code/train/pytorch/cyclegan/data/cyclegan/apple2orange/apple2orange"
+dataset = "apple2orange"
+# data_root = f"/doc/CODE/LEARN/pytorch/cyclegan/data/cyclegan/apple2orange/apple2orange"
+data_root = f"/doc/code/train/pytorch/cyclegan/data/cyclegan/{dataset}/{dataset}"

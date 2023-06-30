@@ -84,7 +84,6 @@ class DataModule(pl.LightningDataModule):
         test_loader = torch.utils.data.DataLoader(self.test_dataset, batch_size=self.batch_size, shuffle=False)
         return test_loader
     
-
 def test():
     import matplotlib.pyplot as plt
     dataset = DataModule()

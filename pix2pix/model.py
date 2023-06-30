@@ -24,7 +24,7 @@ class PixModel(pl.LightningModule):
         self.save_hyperparameters()
         self.automatic_optimization = False
 
-        self.gen = Generator(in_channels=config.in_channels)
+        self.gen = Generator(in_channels=config.in_channels) 
         self.dis = Discriminator(in_channels=config.in_channels)
         self.criterion_1 = nn.BCEWithLogitsLoss()
         self.criterion_2 = nn.L1Loss()

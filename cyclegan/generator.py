@@ -31,10 +31,10 @@ class ResidualBlock(nn.Module):
     
 
 class Generator(nn.Module):
-    def __init__(self, img_channels, num_features=64, num_residuals=9):
+    def __init__(self, in_channels, num_features=64, num_residuals=9):
         super().__init__()
         self.initial = nn.Sequential(
-            nn.Conv2d(img_channels, num_features, kernel_size=7, stride=1, padding=3, padding_mode="reflect"),
+            nn.Conv2d(in_channels, num_features, kernel_size=7, stride=1, padding=3, padding_mode="reflect"),
             nn.ReLU(inplace=True)
         )
         
@@ -58,7 +58,7 @@ class Generator(nn.Module):
             ]
         )
         
-        self.last = nn.Conv2d(num_features, img_channels, kernel_size=7, stride=1, padding=3, padding_mode="reflect")
+        self.last = nn.Conv2d(num_features, in_channels, kernel_size=7, stride=1, padding=3, padding_mode="reflect")
         
     def forward(self, x):
         x = self.initial(x)
@@ -73,7 +73,7 @@ class Generator(nn.Module):
 def test():
     x = torch.randn((4, 3, 256 , 256))
     print(x.shape)
-    model = Generator(img_channels=3, num_features=64, num_residuals=9)
+    model = Generator(in_channels=3, num_features=64, num_residuals=9)
     preds = model(x)
     print(preds.shape)
     assert preds.shape == (4, 3, 256, 256), "Wrong output shape"
